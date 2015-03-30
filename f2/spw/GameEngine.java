@@ -62,7 +62,11 @@ public class GameEngine implements KeyListener, GameReporter{
 			if(!e.isAlive()){
 				e_iter.remove();
 				gp.sprites.remove(e);
+<<<<<<< HEAD
 				score += 100*10;
+=======
+				score += 100*100;
+>>>>>>> 09aa18d870efadd46fc7a4573a9ee6c0c4b028f4
 			}
 		}
 		
