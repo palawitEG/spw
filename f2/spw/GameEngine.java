@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 
 import javax.swing.Timer;
 
@@ -62,11 +63,7 @@ public class GameEngine implements KeyListener, GameReporter{
 			if(!e.isAlive()){
 				e_iter.remove();
 				gp.sprites.remove(e);
-<<<<<<< HEAD
-				score += 100*10;
-=======
-				score += 100*100;
->>>>>>> 09aa18d870efadd46fc7a4573a9ee6c0c4b028f4
+				score += 100;
 			}
 		}
 		
@@ -85,6 +82,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	
 	public void die(){
 		timer.stop();
+		JOptionPane.showMessageDialog(null,score + " " + "Points","Total Score : ",JOptionPane.INFORMATION_MESSAGE); // summary score total
 	}
 	
 	void controlVehicle(KeyEvent e) {

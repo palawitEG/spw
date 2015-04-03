@@ -13,7 +13,7 @@ public class SpaceShip extends Sprite{
 	}
 
 	@Override
-	public void draw(Graphics2D g) {
+	public void draw(Graphics2D g) { // modifine Shape
 		g.setColor(Color.RED);
     	g.fillOval(x, y, width, height);
 		
