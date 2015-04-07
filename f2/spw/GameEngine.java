@@ -82,7 +82,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	
 	public void die(){
 		timer.stop();
-		JOptionPane.showMessageDialog(null,score + " " + "Points","Total Score : ",JOptionPane.INFORMATION_MESSAGE); // summary score total
+		JOptionPane.showMessageDialog(null,score + " " + "Points","Total Score : ",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	void controlVehicle(KeyEvent e) {
@@ -92,6 +92,12 @@ public class GameEngine implements KeyListener, GameReporter{
 			break;
 		case KeyEvent.VK_RIGHT:
 			v.move(1);
+			break;
+		case KeyEvent.VK_UP: // Up / Down move
+			v.moveup(-1);
+			break;
+		case KeyEvent.VK_DOWN:
+			v.moveup(1);
 			break;
 		case KeyEvent.VK_D:
 			difficulty += 0.1;
