@@ -14,7 +14,7 @@ public class SpaceShip extends Sprite{
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.setColor(Color.RED);
+		g.setColor(Color.YELLOW); //change color
     	g.fillOval(x, y, width, height);
 		
 	}

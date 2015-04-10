@@ -29,7 +29,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		
 		gp.sprites.add(v);
 		
-		timer = new Timer(50, new ActionListener() {
+		timer = new Timer(20, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
