@@ -12,7 +12,7 @@ public class Enemy extends Sprite{
 	private boolean alive = true;
 	
 	public Enemy(int x, int y) {
-		super(x, y, 5, 10);
+		super(x, y, 10, 10); // change size
 		
 	}
 
@@ -25,7 +25,7 @@ public class Enemy extends Sprite{
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
 		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		g.fillOval(x, y, width, height); // change fill
 		
 	}
 

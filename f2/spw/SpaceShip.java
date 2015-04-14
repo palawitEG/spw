@@ -14,7 +14,7 @@ public class SpaceShip extends Sprite{
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.setColor(Color.YELLOW); //change color
+		g.setColor(Color.YELLOW);
     	g.fillOval(x, y, width, height);
 		
 	}
@@ -26,7 +26,7 @@ public class SpaceShip extends Sprite{
 		if(x > 400 - width)
 			x = 400 - width;
 	}
-	public void moveup(int direction){ // Y direction move!
+	public void moveup(int direction){
 		y += (step * direction);
 		if(y < 0)
 			y = 0;

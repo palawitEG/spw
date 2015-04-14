@@ -93,7 +93,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		case KeyEvent.VK_RIGHT:
 			v.move(1);
 			break;
-		case KeyEvent.VK_UP: // Up / Down move
+		case KeyEvent.VK_UP:
 			v.moveup(-1);
 			break;
 		case KeyEvent.VK_DOWN:
