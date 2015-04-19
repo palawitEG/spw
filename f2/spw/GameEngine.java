@@ -14,10 +14,11 @@ import javax.swing.Timer;
 
 public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
-		
-	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
-	private SpaceShip v;	
 	
+	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
+	private ArrayList<Bullet> bullet = new ArrayList<Bullet>(); // new arry bullet
+
+	private SpaceShip v;	
 	private Timer timer;
 	
 	private long score = 0;
@@ -49,6 +50,13 @@ public class GameEngine implements KeyListener, GameReporter{
 		gp.sprites.add(e);
 		enemies.add(e);
 	}
+	private void generateBullet(){
+		Bullet g = new Bullet(v.x+(v.width)/2,v.y);
+		System.out.println(v.x+" "+v.y);
+		System.out.println("Shot!");
+		gp.sprites.add(g);
+		bullet.add(g);
+	}
 	
 	private void process(){
 		if(Math.random() < difficulty){
@@ -56,6 +64,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		}
 		
 		Iterator<Enemy> e_iter = enemies.iterator();
+		Iterator<Bullet> g_iter = bullet.iterator();
 		while(e_iter.hasNext()){
 			Enemy e = e_iter.next();
 			e.proceed();
@@ -66,7 +75,16 @@ public class GameEngine implements KeyListener, GameReporter{
 				score += 100;
 			}
 		}
-		
+	
+		while(g_iter.hasNext()){
+			Bullet g = g_iter.next();
+			g.proceed();
+			
+			if(!g.isAlive()){
+				g_iter.remove();
+				gp.sprites.remove(g);
+			}
+		}
 		gp.updateGameUI(this);
 		
 		Rectangle2D.Double vr = v.getRectangle();
@@ -77,9 +95,16 @@ public class GameEngine implements KeyListener, GameReporter{
 				die();
 				return;
 			}
+			Rectangle2D.Double br;
+			for(Bullet g : bullet){
+				br = g.getRectangle();
+				if(br.intersects(er)){
+					gp.sprites.remove(g);
+					e.die();
+				}
+			}
 		}
 	}
-	
 	public void die(){
 		timer.stop();
 		JOptionPane.showMessageDialog(null,score + " " + "Points","Total Score : ",JOptionPane.INFORMATION_MESSAGE);
@@ -101,6 +126,9 @@ public class GameEngine implements KeyListener, GameReporter{
 			break;
 		case KeyEvent.VK_D:
 			difficulty += 0.1;
+			break;
+		case KeyEvent.VK_SPACE:
+			generateBullet();
 			break;
 		}
 	}
