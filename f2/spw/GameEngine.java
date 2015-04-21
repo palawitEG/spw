@@ -16,7 +16,7 @@ public class GameEngine implements KeyListener, GameReporter{
 	GamePanel gp;
 	
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
-	private ArrayList<Bullet> bullet = new ArrayList<Bullet>(); // new arry bullet
+	private ArrayList<Bullet> bullet = new ArrayList<Bullet>();
 
 	private SpaceShip v;	
 	private Timer timer;
