@@ -17,7 +17,8 @@ public class GameEngine implements KeyListener, GameReporter{
 	
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
 	private ArrayList<Bullet> bullet = new ArrayList<Bullet>();
-
+	private ArrayList<Items> items = new ArrayList<Items>();
+	
 	private SpaceShip v;	
 	private Timer timer;
 	
@@ -44,7 +45,11 @@ public class GameEngine implements KeyListener, GameReporter{
 	public void start(){
 		timer.start();
 	}
-	
+	public void generateItems(){
+		Items f = new Items((int)(Math.random()*500), 5);
+		gp.sprites.add(f);
+		items.add(f);
+	}
 	private void generateEnemy(){
 		Enemy e = new Enemy((int)(Math.random()*390), 30);
 		gp.sprites.add(e);
@@ -58,13 +63,14 @@ public class GameEngine implements KeyListener, GameReporter{
 		bullet.add(g);
 	}
 	
-	private void process(){
+	public void process(){
 		if(Math.random() < difficulty){
 			generateEnemy();
+			generateItems();
 		}
-		
 		Iterator<Enemy> e_iter = enemies.iterator();
 		Iterator<Bullet> g_iter = bullet.iterator();
+		Iterator<Items> f_iter = items.iterator();
 		while(e_iter.hasNext()){
 			Enemy e = e_iter.next();
 			e.proceed();
@@ -85,10 +91,20 @@ public class GameEngine implements KeyListener, GameReporter{
 				gp.sprites.remove(g);
 			}
 		}
+		while(f_iter.hasNext()){
+			Items f = f_iter.next();
+			f.proceed();
+
+			if(!f.isAlive()){
+				f_iter.remove();
+				gp.sprites.remove(f);
+			}
+		}
 		gp.updateGameUI(this);
 		
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double er;
+		Rectangle2D.Double fr; // now
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
@@ -101,6 +117,14 @@ public class GameEngine implements KeyListener, GameReporter{
 				if(br.intersects(er)){
 					gp.sprites.remove(g);
 					e.die();
+				}
+			}
+			for(Items f : items){
+				fr = f.getRectangle();
+				if(fr.intersects(vr)){
+					gp.sprites.remove(f);
+					score+=50;
+					return;
 				}
 			}
 		}
