@@ -14,7 +14,7 @@ public class Main {
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		SpaceShip v = new SpaceShip(180, 550, 20, 20);
+		SpaceShip v = new SpaceShip(180, 550, 50, 50);
 		GamePanel gp = new GamePanel();
 		GameEngine engine = new GameEngine(gp, v);
 		frame.addKeyListener(engine);
