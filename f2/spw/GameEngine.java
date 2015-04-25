@@ -13,22 +13,24 @@ import javax.swing.Timer;
 
 
 public class GameEngine implements KeyListener, GameReporter{
+	int t_to_alive = 0;
 	GamePanel gp;
 	
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
 	private ArrayList<Bullet> bullet = new ArrayList<Bullet>();
 	private ArrayList<Items> items = new ArrayList<Items>();
-	
 	private SpaceShip v;	
 	private Timer timer;
-	
+	private Hp hpbars;
 	private long score = 0;
 	private double difficulty = 0.1;
 	
 	public GameEngine(GamePanel gp, SpaceShip v) {
 		this.gp = gp;
-		this.v = v;		
-		
+		this.v = v;
+
+		this.hpbars = new Hp(9,9,v.getHp());		
+		gp.sprites.add(this.hpbars);
 		gp.sprites.add(v);
 		
 		timer = new Timer(20, new ActionListener() {
@@ -46,15 +48,16 @@ public class GameEngine implements KeyListener, GameReporter{
 		timer.start();
 	}
 	public void generateItems(){
-		Items f = new Items((int)(Math.random()*500), 5);
+		Items f = new Items((int)(Math.random()*5000), 5);
 		gp.sprites.add(f);
 		items.add(f);
 	}
 	private void generateEnemy(){
-		Enemy e = new Enemy((int)(Math.random()*390), 30);
+		Enemy e = new Enemy((int)(Math.random()*800), 30);
 		gp.sprites.add(e);
 		enemies.add(e);
 	}
+
 	private void generateBullet(){
 		Bullet g = new Bullet(v.x+(v.width)/2,v.y);
 		System.out.println(v.x+" "+v.y);
@@ -67,6 +70,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		if(Math.random() < difficulty){
 			generateEnemy();
 			generateItems();
+			t_to_alive++;
 		}
 		Iterator<Enemy> e_iter = enemies.iterator();
 		Iterator<Bullet> g_iter = bullet.iterator();
@@ -81,7 +85,6 @@ public class GameEngine implements KeyListener, GameReporter{
 				score += 100;
 			}
 		}
-	
 		while(g_iter.hasNext()){
 			Bullet g = g_iter.next();
 			g.proceed();
@@ -104,7 +107,8 @@ public class GameEngine implements KeyListener, GameReporter{
 		
 		Rectangle2D.Double vr = v.getRectangle();
 		Rectangle2D.Double er;
-		Rectangle2D.Double fr; // now
+		Rectangle2D.Double fr;
+		Rectangle2D.Double bs;
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){

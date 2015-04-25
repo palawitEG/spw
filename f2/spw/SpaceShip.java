@@ -12,7 +12,7 @@ public class SpaceShip extends Sprite{
 	
 	BufferedImage bg;
 	int step = 8;
-	
+	private int Hp = 100;
 	public SpaceShip(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		
@@ -44,6 +44,9 @@ public class SpaceShip extends Sprite{
 			y = 0;
 		if(y > 600 - height)
 			y = 600 - height;
+	}
+	public int getHp(){
+		return this.Hp;
 	}
 
 }
