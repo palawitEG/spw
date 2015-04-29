@@ -13,7 +13,6 @@ import javax.swing.Timer;
 
 
 public class GameEngine implements KeyListener, GameReporter{
-	int t_to_alive = 0;
 	GamePanel gp;
 	
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();	
@@ -70,7 +69,6 @@ public class GameEngine implements KeyListener, GameReporter{
 		if(Math.random() < difficulty){
 			generateEnemy();
 			generateItems();
-			t_to_alive++;
 		}
 		Iterator<Enemy> e_iter = enemies.iterator();
 		Iterator<Bullet> g_iter = bullet.iterator();
@@ -112,8 +110,13 @@ public class GameEngine implements KeyListener, GameReporter{
 		for(Enemy e : enemies){
 			er = e.getRectangle();
 			if(er.intersects(vr)){
-				die();
-				return;
+				v.reduceHP(1);
+                hpbars.damage();
+				System.out.println("Warning!!!! "+ v.getHp());
+				gp.sprites.remove(e);
+				if(v.getHp()<= 0){
+                    die();
+                }
 			}
 			Rectangle2D.Double br;
 			for(Bullet g : bullet){

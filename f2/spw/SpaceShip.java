@@ -30,7 +30,9 @@ public class SpaceShip extends Sprite{
 		}
 		g.drawImage(bg, x, y, width, height, null);
 	}
-
+	public void reduceHP(int damage){
+		this.Hp-= damage;
+	}
 	public void move(int direction){
 		x += (step * direction);
 		if(x < 0)

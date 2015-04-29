@@ -12,4 +12,7 @@ public class Hp extends Sprite{
         g.setColor(Color.RED);
         g.fillRect(x,y,this.hp,20);
     }
+    public void damage(){
+        this.hp -= 1;
+    }
 }
