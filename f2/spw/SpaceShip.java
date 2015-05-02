@@ -23,7 +23,7 @@ public class SpaceShip extends Sprite{
 		//g.setColor(Color.YELLOW);
     	//g.fillOval(x, y, width, height);
 		try{
-			bg = ImageIO.read(new File("f2/spw/Image/S2.png"));
+			bg = ImageIO.read(new File("f2/spw/Image/avion.gif"));
 		}
 		catch(IOException e){
 			// don't
@@ -31,7 +31,10 @@ public class SpaceShip extends Sprite{
 		g.drawImage(bg, x, y, width, height, null);
 	}
 	public void reduceHP(int damage){
-		this.Hp-= damage;
+		this.Hp -= damage;
+	}
+	public void increteHP(int potion){
+		this.Hp += potion;
 	}
 	public void move(int direction){
 		x += (step * direction);

@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
 
 	public void updateGameUI(GameReporter reporter){
 		big.clearRect(0, 0, 400, 600);
-		big.drawString("HP",0,0);
+		big.drawString(String.format("HP %03d", reporter.gethp()), 100, 20);
 		big.setColor(Color.WHITE);
 		big.drawString(String.format("%08d", reporter.getScore()), 300, 20);
 		for(Sprite s : sprites){

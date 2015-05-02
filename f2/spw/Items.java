@@ -17,7 +17,7 @@ public class Items extends Sprite{
 	private boolean alive = true;
 	
 	public Items(int x, int y) {
-		super(x, y, 50, 50);
+		super(x, y, 35, 35);
 		
 	}
 
@@ -30,7 +30,7 @@ public class Items extends Sprite{
 					(float)(Y_TO_DIE - y)/(Y_TO_DIE - Y_TO_FADE)));
 		}
 		try{
-			bg = ImageIO.read(new File("f2/spw/Image/Retro Star.png"));
+			bg = ImageIO.read(new File("f2/spw/Image/potion.png"));
 		}
 		catch(IOException e){
 			// don't

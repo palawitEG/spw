@@ -15,4 +15,7 @@ public class Hp extends Sprite{
     public void damage(){
         this.hp -= 1;
     }
+    public void potion(){
+        this.hp +=1;
+    }
 }

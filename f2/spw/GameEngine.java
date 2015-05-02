@@ -47,7 +47,7 @@ public class GameEngine implements KeyListener, GameReporter{
 		timer.start();
 	}
 	public void generateItems(){
-		Items f = new Items((int)(Math.random()*5000), 5);
+		Items f = new Items((int)(Math.random()*800), 5);
 		gp.sprites.add(f);
 		items.add(f);
 	}
@@ -130,7 +130,10 @@ public class GameEngine implements KeyListener, GameReporter{
 				fr = f.getRectangle();
 				if(fr.intersects(vr)){
 					gp.sprites.remove(f);
-					score+=50;
+					if(v.getHp()<100){
+						v.increteHP(1);
+						hpbars.potion();
+					}
 					return;
 				}
 			}
@@ -163,7 +166,9 @@ public class GameEngine implements KeyListener, GameReporter{
 			break;
 		}
 	}
-
+	public int gethp(){
+		return v.getHp();
+	}
 	public long getScore(){
 		return score;
 	}
