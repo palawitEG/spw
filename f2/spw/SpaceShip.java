@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 public class SpaceShip extends Sprite{
 	
 	BufferedImage bg;
-	int step = 8;
+	int step = 9;
 	private int Hp = 100;
 	public SpaceShip(int x, int y, int width, int height) {
 		super(x, y, width, height);
